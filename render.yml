@@ -1,0 +1,22 @@
+databases:
+  - name: ChibaSquare_DB
+    databaseName: chibasquare_db
+    user: chibasquare
+    region: singapore
+
+services:
+  - type: web
+    name: chibasquare
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ChibaSquare_DB
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+

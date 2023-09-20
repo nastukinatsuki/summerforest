@@ -1,0 +1,58 @@
+<h1>ちばひろば</h1>
+<h3>企画詳細</h3>
+<div class="kokkyo">
+  <h4>タイトル</h4>
+  <p><%= @kokkyo.title %></p>
+  <h4>対象国</h4>
+  <p><%= @kokkyo.country %></p>
+  <h4>解決すべき問題</h4>
+  <p><%= @kokkyo.issue %></p>
+  <h4>プロジェクト</h4>
+  <p><%= @kokkyo.project %></p>
+  <h4>ポイント・キーワード</h4>
+  <p><%= @kokkyo.point %></p>
+
+  <h5><%= @kokkyo.created_at %></h5>
+    <% if user_signed_in? %>
+      <% if current_user.already_liked?(@kokkyo) %>
+        <%= link_to kokkyo_like_path(@kokkyo), method: :delete do %>
+          <i class="fas fa-heart"></i><%= @kokkyo.likes.count %>
+        <% end%>
+      <% else %>
+        <%= link_to kokkyo_likes_path(@kokkyo), method: :post do %>
+           <I class="far fa-heart"></i><%= @kokkyo.likes.count %>
+        <% end %>
+      <% end %>
+    <% else %>
+       <i class="far fa-heart"></i><%= @kokkyo.likes.count %>
+    <% end %>
+ <%= link_to "編集する", edit_kokkyo_path(@kokkyo.id) %>
+</div>
+
+<h2>いいねしたユーザー</h2>
+<% @kokkyo.liked_users.each do |user| %>
+  <li><%= user.email %></li>
+<% end %>
+
+<div class="comment-wrapper">
+  <h2>コメント一覧</h2>
+  <% @comments.each do |c| %>
+    <div>
+      <%= c.user.email unless c.user.blank? %>
+      <br>
+      <%= c.content %>
+    </div>
+      <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@kokkyo, @comment], local: true) do |f| %>
+      <%= f.text_area :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "企画一覧に戻る", kokkyos_path %>

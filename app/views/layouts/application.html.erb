@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChibaSquare</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/ff5a1d6883.js" crossrigin="anonymous"></script>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+     <%= image_tag 'ChibaSquare logomark.png', class:'icon' %>
+     <h1>ChibaSquare</h1>
+     <div class="header-list">
+      <ul>
+       <% if user_signed_in? %>
+        <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+       <% else %>
+        <li><%= link_to "新規登録", new_user_registration_path %></li>
+        <li><%= link_to "ログイン", new_user_session_path %></li>
+       <% end %>
+      </ul>
+     </div>
+    </header>
+    <main>
+     <%= yield %>
+    </main>
+    <footer>
+     <p>Copyright © ChibaSquare All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>

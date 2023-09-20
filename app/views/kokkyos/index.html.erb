@@ -1,0 +1,47 @@
+<h2>アウトプット一覧</h2>
+
+<h4>投稿を検索</h4>
+ <%= form_tag({controller:"kokkyos",action:"index"}, method: :get) do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag '検索する' %>
+<% end %>
+
+<% if user=signed_in? %>
+ <%= link_to "マイページへ", user_path(current_user.id) %>
+<% end %>
+
+<%=link_to "新規投稿ページへ", new_kokkyo_path %>
+
+<div class="kokkyos-container">
+ <% @kokkyos.each do |t| %>
+    <div class="kokkyo">
+     <%= t.title %>
+    </div>
+
+    <div class="kyoryoku">
+
+     <%= image_tag t.image_url, size: "250x200" if t.image? %>
+
+    <%= link_to t.user.name, user_path(t.user.id) %>
+    <%= t.user.email %>
+
+    <% if user_signed_in? %>
+       <% if current_user.already_liked?(t) %>
+          <%= link_to kokkyo_like_path(id: t.id, kokkyo_id: t.id), method: :delete do %>
+            <i class="fas fa-heart"></i><%= t.likes.count %>
+          <% end %>
+       <% else %>
+          <%= link_to kokkyo_likes_path(id: t.id, kokkyo_id: t.id), method: :post do %>
+            <i class="fas fa-heart"></i><%= t.likes.count %>
+          <% end %>
+       <% end %>
+    <% else %>
+    <i class="fas fa-heart"></i><%= t.likes.count %>
+    <% end %>
+
+     <%= link_to "詳細へ", kokkyo_path(t.id) %>
+     <%= link_to "編集する", edit_kokkyo_path(t.id) %>
+     <%= button_to "削除する", kokkyo_path(t.id), method: :delete %>
+    </div>
+ <% end %>
+</div>

@@ -1,0 +1,69 @@
+<div class= "backgroundimage">
+ <%= image_tag @user.bimage_url, size: "100%x300", class: "background" if @user.bimage? %>
+</div>
+
+<div class="iconimage">
+<%= image_tag @user.image_url, size: "250x250", class: "icon" if @user.image?%>
+</div>
+
+<div class="username">
+ <%= @user.name %>
+</div>
+
+<div class="userprofile">
+ <%= @user.profile %>
+</div>
+
+<div class="editer">
+<% if current_user.id == @user.id %>
+ <%= link_to "編集する", edit_user_registration_path %>
+<% end %>
+</div>
+
+<h2>ユーザーの投稿一覧</h2>
+<% @user.kokkyos.each do |t| %>
+ <div class="post">
+    <%= t.title %>
+    <% if user_signed_in? %>
+       <% if current_user.already_liked?(t) %>
+          <%= link_to kokkyo_like_path(id: t.id, kokkyo_id: t.id), method: :delete do %>
+            <i class="fas fa-heart"></i><%= t.likes.count %>
+          <% end %>
+       <% else %>
+          <%= link_to kokkyo_likes_path(id: t.id, kokkyo_id: t.id), method: :post do %>
+            <i class="fas fa-heart"></i><%= t.likes.count %>
+          <% end %>
+       <% end %>
+    <% else %>
+    <i class="fas fa-heart"></i><%= t.likes.count %>
+    <% end %>
+
+     <%= link_to "詳細へ", kokkyo_path(t.id) %>
+ </div>
+<% end %>
+
+<h2>ユーザーがいいねした投稿一覧</h2>
+<% @user.liked_kokkyos.each do |t| %>
+ <div class="likes">
+    <%= t.title %>
+    <% if user_signed_in? %>
+       <% if current_user.already_liked?(t) %>
+          <%= link_to kokkyo_like_path(id: t.id, kokkyo_id: t.id), method: :delete do %>
+            <i class="fas fa-heart"></i><%= t.likes.count %>
+          <% end %>
+       <% else %>
+          <%= link_to kokkyo_likes_path(id: t.id, kokkyo_id: t.id), method: :post do %>
+            <i class="fas fa-heart"></i><%= t.likes.count %>
+          <% end %>
+       <% end %>
+    <% else %>
+    <i class="fas fa-heart"></i><%= t.likes.count %>
+    <% end %>
+
+     <%= link_to "詳細へ", kokkyo_path(t.id) %>
+ </div>
+<% end %>
+
+<div class="backtoproject">
+<%= link_to "企画一覧に戻る", kokkyos_path %>
+</div>

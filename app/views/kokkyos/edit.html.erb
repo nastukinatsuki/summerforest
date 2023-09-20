@@ -1,0 +1,21 @@
+<%= form_for @kokkyo do |f| %>
+    <%= f.label :タイトル %>
+    <%= f.text_field :title, :size => 140 %> 
+    <%= f.submit "編集する" %>
+    <%= image_tag f.image_url, size: "500x450" if f.image? %>
+    <%= f.label :対象国 %>
+    <%= f.text_field :country, :size => 140 %> 
+    <%= f.submit "編集する" %>
+
+    <%= f.label :解決すべき問題 %>
+    <%= f.text_field :issue, :size => 140 %> 
+    <%= f.submit "編集する" %>
+
+    <%= f.label :プロジェクト %>
+    <%= f.text_field :project, :size => 140 %> 
+    <%= f.submit "編集する" %>
+    
+    <%= f.label :ポイント・キーワード %>
+    <%= f.text_field :point, :size => 140 %> 
+    <%= f.submit "編集する" %>
+<% end %>

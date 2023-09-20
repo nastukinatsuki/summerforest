@@ -28,20 +28,10 @@ ActiveRecord::Schema.define(version: 2023_09_15_000946) do
     t.text "issue"
     t.text "project"
     t.text "point"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.string "image"
-  end
-
-  create_table "las", force: :cascade do |t|
-    t.string "title"
-    t.string "country"
-    t.text "issue"
-    t.text "project"
-    t.text "point"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "likes", force: :cascade do |t|

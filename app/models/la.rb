@@ -1,2 +1,0 @@
-class La < ApplicationRecord
-end

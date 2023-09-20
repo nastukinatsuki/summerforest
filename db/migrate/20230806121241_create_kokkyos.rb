@@ -6,12 +6,10 @@ class CreateKokkyos < ActiveRecord::Migration[6.1]
       t.text :issue
       t.text :project
       t.text :point
-
+      t.string :image
       t.timestamps
     end
   end
 
-  def change
-    add_column :kokkyos, :image, :string
-  end
+ 
 end

@@ -16,7 +16,6 @@
     <header>
      <%= image_tag 'ChibaSquare logomark.png', class:'icon' %>
      <h1>ChibaSquare</h1>
-     <div class="header-list">
       <ul>
        <% if user_signed_in? %>
         <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>

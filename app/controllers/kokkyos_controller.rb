@@ -56,7 +56,7 @@ class KokkyosController < ApplicationController
 
   private
   def kokkyo_params
-    params.require(:kokkyo).permit(:title, :country, :issue, :project, :point, :image)
+    params.require(:kokkyo).permit(:title, :country, :issue, :project, :point, :image, :video)
   end
 
 end

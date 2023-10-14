@@ -1,3 +1,56 @@
+<div class="homeimage">
+ <d>　国際協力　</d>
+ <br>
+ <c>世界の課題と取り組みを知り
+ <br>
+ 解決の方法を探ろう</c>
+ <%= image_tag "Child in Africa.jpg", size: "60%x500", class: "homei" %>
+</div>
+
+<h2>国際協力講座ビデオ</h2>
+<div class="kokkyovideo">
+  <blocktitle>➤第一章：国際協力の概要</blocktitle>
+  <div class="Ichizuke">
+    <div class="video1">
+       <videotitle>国際協力の位置づけ</videotitle>
+       <br>
+       <iframe width="448" height="212" src="https://www.youtube.com/embed/Tmc4aCdcq-A?si=9F8zYqwJelLQK9_T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="video2">
+       <videotitle>国際協力の種類</videotitle>
+       <br>
+       <iframe width="448" height="212" src="https://www.youtube.com/embed/b0-fqZwWblE?si=jrcUgz6WOIVKZ9MY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="video3">
+       <videotitle>国際協力とODA</videotitle>
+       <br>
+       <iframe width="448" height="212" src="https://www.youtube.com/embed/CWNJKxYhEs4?si=tIXQLSe_JTAefAV7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+  </div>
+  
+  <blocktitle>➤第二章：国際協力の仕事</blocktitle>
+  <div class="shigoto">
+    <div class="video4">
+       <videotitle>国際協力の仕事①</videotitle>
+       <br>
+       <iframe width="448" height="212" src="https://www.youtube.com/embed/awfhNtQLzZU?si=jO4TT7LS5to5Uo15" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="video5">
+       <videotitle>国際協力の仕事②</videotitle>
+       <br>
+       <iframe width="448" height="212" src="https://www.youtube.com/embed/Nry4nQ5gtMc?si=rRt1CPUkO8IPPHL9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+  </div>
+  <blocktitle>➤第三章:PCM手法を使ってプロジェクトを企画してみよう</blocktitle>
+  <div class="pcm">
+    <div class="video6">
+       <videotitle>PCM手法でプロジェクトを企画しよう</videotitle>
+       <br>
+       <iframe width="448" height="212" src="https://www.youtube.com/embed/11YooGjuZ5k?si=cophjWUfzFsgN6r4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
 <h2>アウトプット一覧</h2>
 
 <h4>投稿を検索</h4>
@@ -6,11 +59,13 @@
     <%= submit_tag '検索する' %>
 <% end %>
 
-<% if user=signed_in? %>
- <%= link_to "マイページへ", user_path(current_user.id) %>
-<% end %>
+<div class="link">
+ <% if user=signed_in? %>
+    <%= link_to "マイページへ", user_path(current_user.id) %>
+ <% end %>
 
-<%=link_to "新規投稿ページへ", new_kokkyo_path %>
+ <%=link_to "新規投稿ページへ", new_kokkyo_path %>
+</div>
 
 <div class="kokkyos-container">
  <% @kokkyos.each do |t| %>
@@ -21,7 +76,7 @@
     <div class="kyoryoku">
 
      <%= image_tag t.image_url, size: "250x200" if t.image? %>
-
+    <br>
     <%= link_to t.user.name, user_path(t.user.id) %>
     <%= t.user.email %>
 
